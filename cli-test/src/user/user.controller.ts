@@ -7,7 +7,7 @@ import { TimeoutInterceptor } from 'src/interceptor/TimeoutInterceptor';
 import { HttpExceptionFilter } from 'src/filter/HttpExceptionFilter';
 
 @Controller('user')
-@UseGuards(new UserGuard())
+// @UseGuards(new UserGuard())
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
