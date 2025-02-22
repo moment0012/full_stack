@@ -5,10 +5,14 @@ import { AuthInterceptor } from './interceptor/AuthInterceptor';
 import { Observable, from } from 'rxjs';
 import { log } from 'console';
 
-@Controller('hello')
+@Controller('')
 export class AppController {
   constructor(private readonly appService: AppService) { }
 
+  @Get()
+  hello() {
+    return "hello";
+  }
   // @Get('/info/:id')
   // getHello(@Param('id') id: string): Person {
   //   return this.appService.getHello(id);

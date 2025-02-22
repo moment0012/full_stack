@@ -18,6 +18,14 @@ function App() {
     });
   }
 
+  function uploadFiles(data) {
+    return axios.post("/api/upload/upload-multiple-files", data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+    })
+  }
+
   const [nestData, setNestData] = useState([]);
   const [userData, setUserData] = useState([]);
   const [fileList, setFileList] = useState([]);
@@ -62,6 +70,19 @@ function App() {
     message.success("上传成功");
   }
 
+  const handleBeforeUpload2 = async (file, files) => {
+    setFileList([...fileList, ...files]);
+  }
+
+  const handleUploadAll = async () => {
+    const formData = new FormData();
+    fileList.forEach((file) => {
+      formData.append("files", file);
+    });
+    await uploadFiles(formData);
+    message.success("上传成功");
+  }
+
 
   return (
     <div className="App">
@@ -82,6 +103,20 @@ function App() {
         >
           <Button icon={<UploadOutlined />}>选择文件</Button>
 
+        </Upload>
+
+        <br />
+
+        <br />
+        <Upload
+          multiple
+          fileList={fileList}
+          onRemove={handleRemove}
+          beforeUpload={handleBeforeUpload2}
+        >
+
+          <Button icon={<UploadOutlined />}>选择文件</Button>
+          <Button onClick={handleUploadAll}>上传多个文件</Button>
         </Upload>
       </div>
     </div>
