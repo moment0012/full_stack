@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UseInterceptors, UseFilters } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UseInterceptors, UseFilters, ValidationPipe } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -12,10 +12,11 @@ export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Post()
-  @UseInterceptors(new TimeoutInterceptor())
-  @UseFilters(new HttpExceptionFilter())
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  // @UseInterceptors(new TimeoutInterceptor())
+  // @UseFilters(new HttpExceptionFilter())
+  create(@Body() createUserDto: CreateUserDto): Record<string, any> {
+    // return this.userService.create(createUserDto);
+    return createUserDto;
   }
 
   @Get()
