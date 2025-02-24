@@ -32,13 +32,20 @@ async function bootstrap() {
     // await userRepository.save(updateData);
     // console.log("更新用户成功");
 
-    const user = await AppDataSource.createQueryBuilder()
-        .select("user")
-        .from(User, "user")
+    // const user = await AppDataSource.createQueryBuilder()
+    //     .select("user")
+    //     .from(User, "user")
+    //     .where("user.id = :id", { id: 1 })
+    //     .getOne();
+
+    // console.log("查询单个用户", user);
+
+
+    const user = await AppDataSource.getRepository(User).createQueryBuilder("user")
         .where("user.id = :id", { id: 1 })
         .getOne();
+    console.log(user);
 
-    console.log("查询单个用户", user);
 }
 
 bootstrap();
