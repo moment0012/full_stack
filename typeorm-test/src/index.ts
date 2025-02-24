@@ -41,7 +41,13 @@ async function bootstrap() {
     // console.log("查询单个用户", user);
 
 
-    const user = await AppDataSource.getRepository(User).createQueryBuilder("user")
+    // const user = await AppDataSource.getRepository(User).createQueryBuilder("user")
+    //     .where("user.id = :id", { id: 1 })
+    //     .getOne();
+    // console.log(user);
+
+
+    const user = await AppDataSource.manager.createQueryBuilder(User, "user")
         .where("user.id = :id", { id: 1 })
         .getOne();
     console.log(user);
